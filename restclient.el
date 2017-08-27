@@ -393,7 +393,7 @@ The buffer contains the raw HTTP response sent by the server."
         (let ((name (match-string-no-properties 1))
               (should-eval (> (length (match-string 2)) 0))
               (value (or (restclient-chop (match-string-no-properties 4)) (match-string-no-properties 3))))
-          (setq vars (cons (cons name (if should-eval (restclient-eval-var value) value)) vars))))
+          (setq vars (cons (cons name (if should-eval (restclient-eval-var (restclient-replace-all-in-string vars value)) value)) vars))))
       vars)))
 
 (defun restclient-eval-var (string)
